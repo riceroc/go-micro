@@ -1,8 +1,15 @@
-# Go-Microservices
-Go microservices project using a Broker service to handle any front end requests.
+# Go-Micro
+Go microservices project using a Broker service to handle any front end requests and an authentication service with a Postgres DB for storing users.
 
-## Cloud Native
-The goal is to containerize the application and prepare it for k8s deployments.
+## How to Run
+`make start` - starts the front end
+`make up_build` - build the binaries and docker images using docker compose
+`make up` - starts docker compose
+`make down` - bring down docker compose build
+`make stop` - stop the frontend application
 
-### TODO
-Add mail service
+### Ports
+Frontend: 8080
+Broker-service: 8081:80
+Authentication-service: 8082:80
+Postgres: 5432:5432
