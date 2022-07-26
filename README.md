@@ -17,3 +17,6 @@ Frontend | 8080
 Broker-service | 8081 | 80
 Authentication-service | 8082 | 80
 Postgres | 5432 | 5432
+
+#### WSL2 Tshoot
+1. When connecting to the Postgres container utilize the IP address of the WSL2 VM where the Postgres VM is running.
