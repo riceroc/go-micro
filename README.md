@@ -19,4 +19,4 @@ Authentication-service | 8082 | 80
 Postgres | 5432 | 5432
 
 #### WSL2 Tshoot
-1. When connecting to the Postgres container utilize the IP address of the WSL2 VM where the Postgres VM is running.
+1. When connecting to the Postgres container utilize the IP address of the WSL2 VM where the Postgres container is running.
