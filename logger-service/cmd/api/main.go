@@ -1,8 +1,11 @@
 package main
 
 import (
+	"authentication/data"
 	"context"
+	"fmt"
 	"log"
+	"net/http"
 	"time"
 
 	"go.mongodb.org/mongo-driver/mongo"
@@ -19,6 +22,7 @@ const (
 var client *mongo.Client
 
 type Config struct {
+	Models data.Models
 }
 
 func main() {
@@ -29,7 +33,7 @@ func main() {
 	}
 	client = mongoClient
 
-	// disconnect from db
+	// disconnect from mongo
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 
@@ -38,7 +42,36 @@ func main() {
 			panic(err)
 		}
 	}()
+
+	app := Config{
+		Models: data.New(client.Database),
+	}
+
+	// starting web server
+	// go app.serve()
+	srv := &http.Server{
+		Addr:    fmt.Sprintf(":%s", webPort),
+		Handler: app.routes(),
+	}
+
+	err = srv.ListenAndServe()
+	if err != nil {
+		log.Panic()
+	}
 }
+
+// func (app *Config) serve() {
+// 	srv := &http.Server{
+// 		Addr:    fmt.Sprintf(":%s", webPort),
+// 		Handler: app.routes(),
+// 	}
+
+// 	err := srv.ListenAndServe()
+// 	if err != nil {
+// 		log.Panic()
+// 	}
+
+// }
 
 func connecToMongo() (*mongo.Client, error) {
 	// create connection options
