@@ -18,3 +18,6 @@
 front-end/frontApp
 broker-service/brokerApp
 authentication-service/authApp
+logger-serivce/loggerApp
+
+project/db-data/mongo
